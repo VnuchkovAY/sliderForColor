@@ -9,34 +9,45 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var redSliderValue2: UISlider!
+    @IBOutlet weak var greenSliderValue2: UISlider!
+    @IBOutlet weak var blueSliderValue2: UISlider!
+    
     @IBOutlet weak var redValue: UILabel!
     @IBOutlet weak var greenValue: UILabel!
     @IBOutlet weak var blueValue: UILabel!
-    @IBOutlet weak var redSliderView: UISlider!
-    @IBOutlet weak var greenSliderView: UISlider!
-    @IBOutlet weak var blueSliderView: UISlider!
     
     @IBOutlet weak var paintView: UIView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        paintView.backgroundColor = UIColor(red: CGFloat(redSliderView.value), green: CGFloat(greenSliderView.value), blue: CGFloat(blueSliderView.value), alpha: 1)
+        paintView.layer.cornerRadius = 15
+        changeColor()
         
     }
 
-    @IBAction func redSliderAction() {
-        redValue.text = String(round(100 * redSliderView.value)/100)
-        paintView.backgroundColor = UIColor(red: CGFloat(redSliderView.value), green: CGFloat(greenSliderView.value), blue: CGFloat(blueSliderView.value), alpha: 1)
+    @IBAction func sliderAction() {
+        
+        changeColor()
     }
-    
-    @IBAction func greenSliderAction() {
-        greenValue.text = String(round(100 * greenSliderView.value)/100)
-        paintView.backgroundColor = UIColor(red: CGFloat(redSliderView.value), green: CGFloat(greenSliderView.value), blue: CGFloat(blueSliderView.value), alpha: 1)
+
+    private func changeColor() {
+        paintView.backgroundColor = UIColor(
+            red: CGFloat(redSliderValue2.value),
+            green: CGFloat(greenSliderValue2.value),
+            blue: CGFloat(blueSliderValue2.value),
+            alpha: 1
+        )
+        
+        defaultValue(slider: redSliderValue2, value: redValue)
+        defaultValue(slider: greenSliderValue2, value: greenValue)
+        defaultValue(slider: blueSliderValue2, value: blueValue)
+        
     }
-    @IBAction func blueSliderAction(_ sender: Any) {
-        blueValue.text = String(round(100 * blueSliderView.value)/100)
-        paintView.backgroundColor = UIColor(red: CGFloat(redSliderView.value), green: CGFloat(greenSliderView.value), blue: CGFloat(blueSliderView.value), alpha: 1)
+
+    private func defaultValue(slider: UISlider, value: UILabel) {
+        value.text = String(round(100 * slider.value)/100)
+        
     }
    
 }
